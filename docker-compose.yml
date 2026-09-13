@@ -1,0 +1,7 @@
+services:
+  regex:
+    build: .
+    image: regex-utility:local
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
