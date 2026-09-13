@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Test regular expressions locally — nothing leaves your browser."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0f14'/%3E%3Ctext x='8' y='12' font-size='10' text-anchor='middle' fill='%234cc2ff' font-family='monospace'%3E.%2A%3C/text%3E%3C/svg%3E"
+    />
+    <title>Regex — local regular expression tester</title>
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>Regex</h1>
+        <p class="tagline">Test regular expressions locally — nothing leaves your browser.</p>
+      </div>
+      <div class="share-area">
+        <span id="share-warning" class="share-warning" hidden>Share link is very large</span>
+        <button type="button" id="copy-share">Copy share link</button>
+      </div>
+    </header>
+    <noscript>
+      <p class="noscript">This tool runs entirely in your browser and needs JavaScript to work.</p>
+    </noscript>
+    <main class="layout">
+      <section class="card pattern-card" aria-labelledby="pattern-heading">
+        <h2 id="pattern-heading">Pattern</h2>
+        <label class="input-label" for="pattern-input">Regular expression</label>
+        <input id="pattern-input" type="text" spellcheck="false" autocomplete="off" class="mono" />
+        <p id="pattern-preview" class="pattern-preview" aria-hidden="true">/…/</p>
+        <fieldset class="flags">
+          <legend>Flags</legend>
+          <label class="flag"><input type="checkbox" id="flag-g" /> g — global</label>
+          <label class="flag"><input type="checkbox" id="flag-i" /> i — ignore case</label>
+          <label class="flag"><input type="checkbox" id="flag-m" /> m — multiline</label>
+          <label class="flag"><input type="checkbox" id="flag-s" /> s — dot matches all</label>
+          <label class="flag"><input type="checkbox" id="flag-u" /> u — unicode</label>
+        </fieldset>
+        <p id="pattern-error" class="error" role="alert" hidden></p>
+        <div class="pattern-actions">
+          <button
+            type="button"
+            id="explain-toggle"
+            aria-expanded="false"
+            aria-controls="explain-card"
+          >
+            Explain pattern
+          </button>
+          <button type="button" id="copy-pattern">Copy pattern</button>
+        </div>
+      </section>
+
+      <section class="card explain-card" id="explain-card" aria-labelledby="explain-heading" hidden>
+        <h2 id="explain-heading">Explanation</h2>
+        <ul id="explain-list" class="explain-list"></ul>
+        <ul id="explain-warnings" class="explain-warnings"></ul>
+      </section>
+
+      <section class="card text-card" aria-labelledby="text-heading">
+        <h2 id="text-heading">Test text</h2>
+        <label class="input-label" for="text-input">Text to search</label>
+        <div class="editor">
+          <div id="highlight" class="highlight" aria-hidden="true"></div>
+          <textarea id="text-input" rows="12" spellcheck="false"></textarea>
+        </div>
+      </section>
+
+      <section class="card results-card" aria-labelledby="results-heading">
+        <h2 id="results-heading">Results</h2>
+        <p id="match-status" class="status" role="status" aria-live="polite"></p>
+        <p id="worker-status" class="worker-status" aria-live="polite" hidden></p>
+        <div class="results-actions">
+          <button type="button" id="copy-matches">Copy matches</button>
+        </div>
+        <ol id="match-list" class="match-list"></ol>
+        <div class="replacement">
+          <h3>Replacement</h3>
+          <label class="input-label" for="replacement-input">Replacement string</label>
+          <input
+            id="replacement-input"
+            type="text"
+            spellcheck="false"
+            autocomplete="off"
+            class="mono"
+          />
+          <p id="replacement-note" class="note" hidden>
+            Without the g flag, only the first match is replaced.
+          </p>
+          <pre id="replacement-preview" class="replacement-preview">—</pre>
+          <button type="button" id="copy-replacement">Copy result</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
